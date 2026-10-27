@@ -10,4 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - run: curl -fsS -m 60 -H "X-Poll-Key: ${{ secrets.POLL_KEY }}" https://aw-poczta.vercel.app/api/poll
+      - name: Check for new mail
+        run: |
+          curl -fsS -m 60 -H "X-Poll-Key: ${{ secrets.POLL_KEY }}" https://aw-poczta.vercel.app/api/poll
