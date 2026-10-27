@@ -1,0 +1,13 @@
+# Calls Poczta AW every 5 minutes so the phone gets push notifications about new mail.
+# (Vercel Hobby crons run only once a day.) The key lives in the POLL_KEY repository secret.
+name: Poczta AW poll
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - run: curl -fsS -m 60 -H "X-Poll-Key: ${{ secrets.POLL_KEY }}" https://aw-poczta.vercel.app/api/poll
